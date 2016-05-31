@@ -6,19 +6,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private static final String URL = "http://192.168.8.199";
 	private WebView wv;
+	ProgressBar pb;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,28 +36,42 @@ public class MainActivity extends Activity {
         
         //加载网页
         wv = (WebView)findViewById(R.id.webView);
+        pb = (ProgressBar)findViewById(R.id.progressBar);
         initWebView();
     }
 
     //加载网页
-    @SuppressLint("NewApi") private void initWebView(){
+    @SuppressLint("NewApi") 
+    private void initWebView(){
     	//加载web资源
     	wv.loadUrl(URL);
+    	wv.setBackgroundColor(2);
+    	wv.setWebChromeClient(new WebChromeClient());
     	//覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
     	wv.setWebViewClient(new WebViewClient() {
     		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    			if(url.startsWith("mqqwpa")){
+    				if(!checkApkExist(MainActivity.this,"com.tencent.mqq")){
+	    				Toast toast = Toast.makeText(getApplicationContext(),
+							     "调起QQ失败,请确保已安装QQ", Toast.LENGTH_LONG);
+						toast.show();
+						view.loadUrl(URL);
+    				}
+    			}
     			return false;
     		}            
     		@Override            
     		public WebResourceResponse shouldInterceptRequest(WebView view,String url) {   
     			if (url.startsWith("http") || url.startsWith("https")) {
     				return super.shouldInterceptRequest(view, url);
-    			} else {
+    			} else if(url.startsWith("mqqwpa")){
     				Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse(url));                    
-    				startActivity(in);                    
-    				return null;                
-    			}            
-    		}        
+    				startActivity(in); 
+    				return null; 
+    			}else{
+    				return null;
+    			}
+    		} 
     	});
     	initSettint(wv);
     }
@@ -109,4 +132,28 @@ public class MainActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    
+    public boolean checkApkExist(Context context, String packageName) {
+    	if (packageName == null || "".equals(packageName))
+    		return false;
+    	try {
+    		ApplicationInfo info = context.getPackageManager().getApplicationInfo(packageName,
+    				PackageManager.GET_UNINSTALLED_PACKAGES);
+    		return true;
+    	} catch (NameNotFoundException e) {
+    		return false;
+    	}
+    }
+    public class WebChromeClient extends android.webkit.WebChromeClient {
+		@Override
+		public void onProgressChanged(WebView view, int newProgress) {
+			if (newProgress == 100) {
+				pb.setVisibility(View.GONE);
+			}else{
+				pb.setProgress(newProgress);
+			}
+			super.onProgressChanged(view, newProgress);
+		}
+
+	}
 }

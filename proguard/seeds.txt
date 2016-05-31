@@ -2770,6 +2770,7 @@ com.jiuxianqiao.txq.R$dimen: R$dimen()
 com.jiuxianqiao.txq.R$drawable: int ic_launcher
 com.jiuxianqiao.txq.R$drawable: R$drawable()
 com.jiuxianqiao.txq.R$id: int action_settings
+com.jiuxianqiao.txq.R$id: int progressBar
 com.jiuxianqiao.txq.R$id: int webView
 com.jiuxianqiao.txq.R$id: R$id()
 com.jiuxianqiao.txq.R$layout: int activity_main
