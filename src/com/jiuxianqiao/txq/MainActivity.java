@@ -12,7 +12,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebResourceResponse;
@@ -45,7 +44,6 @@ public class MainActivity extends Activity {
     private void initWebView(){
     	//加载web资源
     	wv.loadUrl(URL);
-    	wv.setBackgroundColor(2);
     	wv.setWebChromeClient(new WebChromeClient());
     	//覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
     	wv.setWebViewClient(new WebViewClient() {
