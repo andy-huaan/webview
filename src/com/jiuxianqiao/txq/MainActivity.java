@@ -3,17 +3,22 @@ package com.jiuxianqiao.txq;
 import com.jiuxianqiao.txq.R;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -24,7 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private static final String URL = "http://192.168.8.199";
+	private static final String URL = "http://192.168.8.185";
 	private WebView wv;
 	ProgressBar pb;
 	
@@ -32,6 +37,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        //…Ë÷√◊¥Ã¨¿∏—’…´
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			setTranslucentStatus(true);
+		}
+		SystemBarTintManager tintManager = new SystemBarTintManager(this);
+		tintManager.setStatusBarTintEnabled(true);
+		tintManager.setStatusBarTintColor(Color.rgb(24, 106, 231));
         
         //º”‘ÿÕ¯“≥
         wv = (WebView)findViewById(R.id.webView);
@@ -153,5 +166,18 @@ public class MainActivity extends Activity {
 			super.onProgressChanged(view, newProgress);
 		}
 
+	}
+    
+    @TargetApi(19) 
+	private void setTranslucentStatus(boolean on) {
+		Window win = getWindow();
+		WindowManager.LayoutParams winParams = win.getAttributes();
+		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+		if (on) {
+			winParams.flags |= bits;
+		} else {
+			winParams.flags &= ~bits;
+		}
+		win.setAttributes(winParams);
 	}
 }
