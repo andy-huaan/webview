@@ -29,7 +29,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private static final String URL = "http://192.168.8.185";
+	//private static final String URL = "https://oa.cnlod.cn/hz/login.html";
+	private static final String URL = "101.201.197.75";
 	private WebView wv;
 	ProgressBar pb;
 	
@@ -98,6 +99,8 @@ public class MainActivity extends Activity {
     	webSettings.setJavaScriptEnabled(true);  
     	webSettings.setJavaScriptCanOpenWindowsAutomatically(true);  
     	webSettings.setUseWideViewPort(true);//关键点  
+    	webSettings.setDomStorageEnabled(true);
+    	webSettings.setDatabaseEnabled(true);
     	
     	webSettings.setDisplayZoomControls(false);  
     	webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本  
