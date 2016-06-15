@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	//private static final String URL = "https://oa.cnlod.cn/hz/login.html";
-	private static final String URL = "101.201.197.75";
+	private static final String URL = "http://101.201.197.75";
 	private WebView wv;
 	ProgressBar pb;
 	
