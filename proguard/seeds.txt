@@ -2759,10 +2759,14 @@ android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB: SlidingPan
 android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJBMR1: SlidingPaneLayout$SlidingPanelLayoutImplJBMR1()
 android.support.v4.widget.ViewDragHelper$1: ViewDragHelper$1()
 android.support.v4.widget.ViewDragHelper$Callback: ViewDragHelper$Callback()
+com.jiuxianqiao.txq.AppContext
+com.jiuxianqiao.txq.AppContext: AppContext()
 com.jiuxianqiao.txq.BuildConfig: BuildConfig()
+com.jiuxianqiao.txq.GPSCheck: GPSCheck()
 com.jiuxianqiao.txq.MainActivity
 com.jiuxianqiao.txq.MainActivity: MainActivity()
 com.jiuxianqiao.txq.NetWorkCheck: NetWorkCheck()
+com.jiuxianqiao.txq.NewWorkReceiver: NewWorkReceiver()
 com.jiuxianqiao.txq.PermissionCheck: PermissionCheck()
 com.jiuxianqiao.txq.R: R()
 com.jiuxianqiao.txq.R$attr: R$attr()

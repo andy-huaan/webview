@@ -5,7 +5,6 @@ import com.jiuxianqiao.txq.R;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -48,7 +47,7 @@ public class MainActivity extends Activity {
         }
     }
     
-    private void createWebView(){
+    public void createWebView(){
     	//ÉèÖÃ×´Ì¬À¸ÑÕÉ«
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
