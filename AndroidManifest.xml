@@ -5,7 +5,8 @@
     android:versionName="1.0" >
 
     
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET"/><!-- 访问网络 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/><!-- 检查网络状态 -->
 
     <application
         android:allowBackup="true"

@@ -5,6 +5,7 @@ import com.jiuxianqiao.txq.R;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -39,7 +40,16 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //设置状态栏颜色
+        if(!NetWorkCheck.isNetworkAvailable(this)){
+        	Toast.makeText(getApplicationContext(), "当前无可用网络！", Toast.LENGTH_LONG).show();
+        	//System.exit(0);
+        }else{
+        	createWebView();
+        }
+    }
+    
+    private void createWebView(){
+    	//设置状态栏颜色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
 		}
@@ -94,8 +104,8 @@ public class MainActivity extends Activity {
     	//设置支持JavaScript
     	webSettings.setJavaScriptEnabled(true);  
     	
-    	//webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
-    	webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存
+    	webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
+    	//webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存
     	webSettings.setJavaScriptEnabled(true);  
     	webSettings.setJavaScriptCanOpenWindowsAutomatically(true);  
     	webSettings.setUseWideViewPort(true);//关键点  
@@ -137,7 +147,9 @@ public class MainActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==KeyEvent.KEYCODE_BACK){
-        	if(wv.canGoBack()) {//返回上一页面
+        	if(wv == null){
+        		System.exit(0);
+        	}else if(wv.canGoBack()) {//返回上一页面
                 wv.goBack();
                 return true;
             }else{

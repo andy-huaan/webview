@@ -2762,6 +2762,8 @@ android.support.v4.widget.ViewDragHelper$Callback: ViewDragHelper$Callback()
 com.jiuxianqiao.txq.BuildConfig: BuildConfig()
 com.jiuxianqiao.txq.MainActivity
 com.jiuxianqiao.txq.MainActivity: MainActivity()
+com.jiuxianqiao.txq.NetWorkCheck: NetWorkCheck()
+com.jiuxianqiao.txq.PermissionCheck: PermissionCheck()
 com.jiuxianqiao.txq.R: R()
 com.jiuxianqiao.txq.R$attr: R$attr()
 com.jiuxianqiao.txq.R$dimen: int activity_horizontal_margin
