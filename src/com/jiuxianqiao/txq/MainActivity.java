@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
         }
     }
     
-    public void createWebView(){
+    @SuppressLint("NewApi") public void createWebView(){
     	//设置状态栏颜色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			setTranslucentStatus(true);
@@ -71,6 +72,7 @@ public class MainActivity extends Activity {
     	//覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
     	wv.setWebViewClient(new WebViewClient() {
     		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    			//Log.d("zhaohuaan", "当前地址---------"+wv.getUrl());
     			if(url.startsWith("mqqwpa")){
     				if(!checkApkExist(MainActivity.this,"com.tencent.mqq")){
 	    				Toast toast = Toast.makeText(getApplicationContext(),
